@@ -16,7 +16,7 @@ public class ClienteController {
 	@Qualifier("clientedaojpa")
 	private IClienteDao clientedao;
 	
-	@RequestMapping(value="listar",method = RequestMethod.GET)
+	@RequestMapping(value="/listar",method = RequestMethod.GET)
 	public String Listar(Model model) {
 		model.addAttribute("titulo","Listado de clientes");
 		model.addAttribute("clientes",clientedao.findAll());
