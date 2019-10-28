@@ -12,11 +12,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.emilianomacias0.app.models.dao.IClienteDao;
 import com.emilianomacias0.app.models.entity.Cliente;
 
 @Controller
+@SessionAttributes("cliente")
 public class ClienteController {
 
 	@Autowired
@@ -54,13 +57,22 @@ public class ClienteController {
 	
 	
 	@RequestMapping(value="/form",method = RequestMethod.POST)
-	public String guardar(@Valid Cliente cliente, BindingResult result,Model model) {
+	public String guardar(@Valid Cliente cliente, BindingResult result,Model model,SessionStatus status) {
 		if(result.hasErrors()) {
 			model.addAttribute("titulo","Formulario de clientes");
 			//model.addAttribute("error","Formulario de clientes");
 			return "form";
 		}
 		clientedao.save(cliente);
+		status.setComplete();
 		return "redirect:listar";
+	}
+	
+	@RequestMapping(value = "/eliminar/{id}")
+	public String eliminar(@PathVariable(value = "id") Long id) {
+		if(id > 0) {
+			clientedao.delete(id);
+		}
+		return "redirect:/listar";		
 	}
 }

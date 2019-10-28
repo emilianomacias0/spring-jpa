@@ -41,6 +41,7 @@
 				<th>Email</th>
 				<th>Fecha</th>
 				<th>Editar</th>
+				<th>Eliminar</th>
 			</thead>
 			<tbody>
 				<tr th:each="cliente: ${clientes}">
@@ -49,7 +50,8 @@
 					<td th:text="${cliente.apellido}"></td>
 					<td th:text="${cliente.email}"></td>
 					<td th:text="${cliente.createdAt}"></td>
-					<td><a th:href="@{/form/} + ${cliente.id}">Editar</a></td>
+					<td><a class="btn btn-primary btn-xs" th:href="@{/form/} + ${cliente.id}">Editar</a></td>
+					<td><a class="btn btn-danger btn-xs" th:href="@{/eliminar/} + ${cliente.id}" onclick="return confirm('Estas seguro que quieres eliminar?');">Eliminar</a></td>
 				</tr>
 			</tbody>
 		</table>
