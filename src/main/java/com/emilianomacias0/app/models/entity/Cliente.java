@@ -30,26 +30,25 @@ public class Cliente implements Serializable {
 
 	// @Column(name = "nombre_cliente")
 	@NotEmpty
-	@Size(min = 4,max = 12)
+	@Size(min = 4,max = 30)
 	private String nombre;
 	@NotEmpty
 	private String apellido;
 	@NotEmpty
 	@Email
 	private String email;
-
 	@NotNull
 	@Column(name = "created_at")
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createdAt;
 
-	@PrePersist
+	/*@PrePersist
 	public void prePersist() {
 		if(createdAt == null) {
 		createdAt = new Date();
 		}
-	}
+	}*/
 	
 	public Long getId() {
 		return id;
