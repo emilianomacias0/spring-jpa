@@ -19,7 +19,7 @@ public class ClienteServiceImpl implements IClienteService {
 	@Transactional(readOnly = true)
 	public List<Cliente> findAll() {
 		
-		return clientedao.findAll();
+		return (List<Cliente>) clientedao.findAll();
 	}
 
 	@Override
@@ -33,13 +33,13 @@ public class ClienteServiceImpl implements IClienteService {
 	@Transactional(readOnly = true)
 	public Cliente findOne(Long id) {
 		// TODO Auto-generated method stub
-		return clientedao.findOne(id);
+		return clientedao.findById(id).orElse(null);
 	}
 
 	@Override
 	@Transactional
 	public void delete(Long id) {
-		clientedao.delete(id);
+		clientedao.deleteById(id);
 		
 	}
 
